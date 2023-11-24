@@ -6,6 +6,8 @@ provider:
   runtime: nodejs18.x
   profile: alex
   region: eu-north-1
+  iam:
+    role: arn:aws:iam::879587532835:role/notes-cloud
 
 
 plugins:
