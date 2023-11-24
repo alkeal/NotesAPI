@@ -1,29 +1,9 @@
 const { sendResponse } = require ('../../responses/index');
+const AWS = require('aws-sdk');
+const { send } = require('process');
+const db = new AWS.DynamoDB.DocumentClient();
 
 
-var notes = [
-
-    {
-     
-      note: "dncwwwiefnciefneinc"
-  
-  
-    },
-  
-    {
-     
-      note: "dnciefnciefneinc"
-  
-  
-    },
-    {
-     
-      note: "dnciefnciefccrccrneinc"
-  
-  
-    }
-  
-  ]; 
   
 
 
@@ -33,10 +13,18 @@ var notes = [
 exports.handler = async (event, contect ) => {
 
 
+  const {Items} = await db.scan({
+
+    TableName: 'notes-db',
+     
 
 
 
- return sendResponse(200, {notes});
+
+  }).promise();
+
+
+ return sendResponse(200, {success: true, notes : Items});
 
 
 
