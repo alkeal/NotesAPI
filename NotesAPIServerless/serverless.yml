@@ -1,0 +1,17 @@
+service: NotesAPIServerless
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  profile: alex
+  region: eu-north-1
+
+functions:
+  getNotes:
+   handler: functions/getNotes/index.handler
+   events:
+     - httpApi:
+         path: '/notes'
+         method: GET
+    
