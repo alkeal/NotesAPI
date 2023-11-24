@@ -26,4 +26,22 @@ functions:
      - httpApi:
          path: '/notes'
          method: GET
+
+
+
+
+resources:
+  Resources:
+    notesDb:
+      Type: AWS::DynamoDB::Table
+      Properties: 
+        TableName: notes-db
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
     
