@@ -26,13 +26,12 @@ functions:
      - httpApi:
          path: '/notes'
          method: GET
-
   postNotes:
     handler: functions/postNotes/index.handler
     events:
-     - httpAPI:
-       path: '/notes/'
-       method: POST
+      - httpApi:
+         path: '/notes'
+         method: POST
 
 
 
