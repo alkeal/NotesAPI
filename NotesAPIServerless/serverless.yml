@@ -7,6 +7,16 @@ provider:
   profile: alex
   region: eu-north-1
 
+
+plugins:
+ - serverless-webpack
+
+
+package:
+ individually: true
+
+
+
 functions:
   getNotes:
    handler: functions/getNotes/index.handler
