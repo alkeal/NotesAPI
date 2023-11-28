@@ -12,9 +12,18 @@ exports.handler = async (event, contect ) => {
 
    const timestamp = new Date().getTime();
 
-   notes.id = '${timestamp}';
+   notes.id = `${timestamp}`;
 
-
+   const MaxTitleLength = 50;
+   const MaxTextLength = 300;
+   
+   if (notes.title.length > MaxTitleLength) {
+     return `Title is too long. It should be ${MaxTitleLength} characters or less.`;
+   }
+   
+   if (notes.text.length > MaxTextLength) {
+     return `Text is too long. It should be ${MaxTextLength} characters or less.`;
+   }
 
 
 
@@ -23,8 +32,14 @@ exports.handler = async (event, contect ) => {
 
 
      TableName: 'notes-db',
-     Item: notes
-
+     Item: {
+      id: notes.id,
+      title: notes.title,
+      text: notes.text,
+      createdAt: new Date().getTime(),
+      modifiedAt: new Date().getTime()
+     }
+     
 
 
    }).promise()
