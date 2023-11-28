@@ -32,7 +32,12 @@ functions:
       - httpApi:
          path: '/notes'
          method: POST
-
+  signUp:
+    handler: functions/signUp/index.handler
+    events:
+      - httpApi:
+         path: '/auth/signUp'
+         method: POST
 
 
 
@@ -49,5 +54,17 @@ resources:
           - AttributeName: id
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
-
     
+    usernoteDb:
+      Type: AWS::DynamoDB::Table
+      Properties: 
+        TableName: noteaccounts
+        AttributeDefinitions:
+          - AttributeName: username
+            AttributeType: S
+        KeySchema:
+          - AttributeName: username
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+    
+   
