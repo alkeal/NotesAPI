@@ -1,6 +1,7 @@
 const AWS = require('aws-sdk');
 const { sendResponse } = require('../../responses');
 const { send } = require('process');
+const { nanoid } = require('nanoid');
 const db = new AWS.DynamoDB.DocumentClient();
 
 
@@ -12,7 +13,7 @@ exports.handler = async (event, contect ) => {
 
    const timestamp = new Date().getTime();
 
-   notes.id = `${timestamp}`;
+   //notes.id = `${timestamp}`;
 
    const MaxTitleLength = 50;
    const MaxTextLength = 300;
@@ -33,7 +34,9 @@ exports.handler = async (event, contect ) => {
 
      TableName: 'notes-db',
      Item: {
-      id: notes.id,
+      
+
+      id: nanoid(),
       title: notes.title,
       text: notes.text,
       createdAt: new Date().getTime(),
