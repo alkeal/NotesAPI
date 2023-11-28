@@ -11,5 +11,9 @@
   "license": "ISC",
   "devDependencies": {
     "serverless-webpack": "^5.13.0"
+  },
+  "dependencies": {
+    "@middy/core": "^5.0.3",
+    "jsonwebtoken": "^9.0.2"
   }
 }
