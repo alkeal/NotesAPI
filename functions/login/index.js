@@ -4,32 +4,34 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { sendResponse } = require('../../responses');
 
+async function getUser(username) {
+
+   try{
+    const user = await db.get({
+
+      TableName: "noteaccounts",
+      Key: {
+         username: username
+
+      }
 
 
-async function getUser(username){
 
-   try {
-  const user = await db.get({
-    
-    TableName: 'noteaccounts',
-    Key: {
-        username: username
-    }
 
-  }).promise();
-    
-   if(user?.item)
+    }).promise();
+
+    if (user?.Item)
       return user.Item
-   else 
-    return false
-
-   } catch(error) {
-
-      console.log(error)
+   else
       return false
 
 
-   }
+} catch (error){
+
+  console.log(error)
+return false
+
+   
 
 
 
@@ -37,23 +39,38 @@ async function getUser(username){
 
 
 
-async function login(username, password){
 
+}
+
+
+
+
+
+
+
+
+async function login(username, password) {
 
     const user = await getUser(username);
 
-    if (!user) return { success : false, message: 'Incorrect username or password'};
+
+    if (!user) return { success: false, message: 'Incorrect username or password'}
+
 
     const correctPassword = await bcrypt.compare(password, user.password);
+
+    if (!correctPassword) return  { success: false, message: 'Incorrect username or password'}
+ 
+    // Här skapar vi våran token
     
-    if(!correctPassword) return { success : false, message: 'Incorrect username or password'};
+    const token = jwt.sign({ id: user.userId, username: user.username}, "aabbcc", { expiresIn: 3600 });
+
+    return { success: true, token: token}
 
 
-    const token =  jwt.sign({id: user.userId, username: user.username}, "aabbcc", { expiresIn: 3600});
-
-    return { success : true, token: token}
 
 }
+
 
 
 
@@ -61,17 +78,16 @@ async function login(username, password){
 
 
 exports.handler = async (event) => {
+    
+  const { username, password } = JSON.parse(event.body);
 
-  const {username, password} = JSON.parse(event.body);
 
+  const result = await login(username, password);
+ 
+   if(result.success)
 
- const result = await login(username, password);
-
- if (result.success)
-
- return sendResponse(200, result);
-
- else 
-   return sendResponse(400, result);
+     return sendResponse(200, result);
+   else 
+     return sendResponse(400, result);
 
 }
