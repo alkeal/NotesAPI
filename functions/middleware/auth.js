@@ -6,7 +6,7 @@ const validateToken = {
     try{
 
 
-   const token = request.event.header.authorization.replace('Bearer', '');
+   const token = request.event.headers.authorization.replace('Bearer', '');
 
    if (!token) throw new Error();
   

@@ -1,9 +1,8 @@
 const AWS = require('aws-sdk');
 const db = new AWS.DynamoDB.DocumentClient();
 const { sendResponse } = require('../../responses');
-
-
-
+import middy from '@middy/core';
+const { validateToken } = require('../middleware/auth');
 
 const changeNotes = async (event, context) => {
     if (event?.error && event?.error === "401") {
