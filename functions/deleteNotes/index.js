@@ -19,7 +19,7 @@ const  db = new AWS.DynamoDB.DocumentClient();
     };
     await db.delete(params).promise()
         
-        return sendResponse(200,{success : true, message : 'deleted note ${}' });
+        return sendResponse(200,{success : true, message : 'note ${nanoid} is now deleted!' });
     } catch (error) {
         return sendResponse(500, {succes: false, errorMessage : 'error ${error.message}'});
     }
