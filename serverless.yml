@@ -32,6 +32,12 @@ functions:
       - httpApi:
          path: '/notes'
          method: POST
+  changeNotes:
+    handler: functions/changeNotes/index.handler
+    events:
+      - httpApi:
+         path: '/notes'
+         method: PUT      
   deleteNotes:
     handler: functions/deleteNotes/index.handler
     events:
