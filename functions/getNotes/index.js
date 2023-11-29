@@ -1,4 +1,4 @@
-const { default: middy } = require('@middy/core');
+import middy from '@middy/core';
 const { sendResponse } = require ('../../responses/index');
 const AWS = require('aws-sdk');
 const { send } = require('process');
