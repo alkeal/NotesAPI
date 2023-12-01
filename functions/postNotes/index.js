@@ -2,9 +2,9 @@ const AWS = require('aws-sdk');
 const { sendResponse } = require('../../responses');
 const { send } = require('process');
 const { nanoid } = require('nanoid');
+const { validateToken } = require('../middleware/auth');
 const db = new AWS.DynamoDB.DocumentClient();
-
-
+import middy from '@middy/core'
 
 exports.handler = async (event, contect ) => {
 
@@ -35,7 +35,7 @@ exports.handler = async (event, contect ) => {
      TableName: 'notes-db',
      Item: {
       
-
+      username: notes.username,
       id: nanoid(),
       title: notes.title,
       text: notes.text,
@@ -58,4 +58,8 @@ exports.handler = async (event, contect ) => {
 
 }
    
-}
+};
+
+const handler = middy(handler).use(validateToken);
+
+module.exports = { handler };

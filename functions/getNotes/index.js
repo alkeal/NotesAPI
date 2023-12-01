@@ -1,11 +1,9 @@
-import middy from '@middy/core';
 const { sendResponse } = require ('../../responses/index');
 const AWS = require('aws-sdk');
 const { send } = require('process');
 const { validateToken } = require('../middleware/auth');
 const db = new AWS.DynamoDB.DocumentClient();
-
-
+import middy from '@middy/core'
   
 
 
@@ -25,6 +23,7 @@ const getNotes = async (event, contect ) => {
   const username = event.username
 
   try{
+  
   const result = await db.scan({
 
     TableName: 'notes-db',
