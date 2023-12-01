@@ -1,12 +1,14 @@
+const { sendResponse } = require ('../../responses/index');
 const AWS = require('aws-sdk');
-const { sendResponse } = require('../../responses');
 const { send } = require('process');
-const { nanoid } = require('nanoid');
 const { validateToken } = require('../middleware/auth');
 const db = new AWS.DynamoDB.DocumentClient();
-import middy from '@middy/core'
+const { nanoid } = require('nanoid');
+const middy = require('@middy/core');
+  
 
-exports.handler = async (event, contect ) => {
+
+const handler = async (event, context ) => {
 
 
    const notes = JSON.parse(event.body);
@@ -54,12 +56,13 @@ exports.handler = async (event, contect ) => {
    
    
 } catch (error) {
+    console.log(error);
     return sendResponse(500, { success: false});
-
+    
 }
    
 };
 
-const handler = middy(handler).use(validateToken);
+//const handler = middy(postNotes).use(validateToken);
 
 module.exports = { handler };

@@ -2,7 +2,7 @@
 const AWS = require('aws-sdk');
 const { sendResponse } = require('../../responses');
 const  db = new AWS.DynamoDB.DocumentClient();
-import middy from '@middy/core'
+const middy = require('@middy/core');
 
 
     exports.handler = async (event,context) => {

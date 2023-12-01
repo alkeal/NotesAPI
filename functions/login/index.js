@@ -63,7 +63,7 @@ async function login(username, password) {
  
     // Här skapar vi våran token
     
-    const token = jwt.sign({ id: user.userId, username: user.username}, "aabbcc", { expiresIn: 3600 });
+    const token = jwt.sign({ id: user.userId, username: user.username}, 'aabbcc', { expiresIn: 3600 });
 
     return { success: true, token: token}
 

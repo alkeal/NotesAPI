@@ -3,7 +3,7 @@ const AWS = require('aws-sdk');
 const { send } = require('process');
 const { validateToken } = require('../middleware/auth');
 const db = new AWS.DynamoDB.DocumentClient();
-import middy from '@middy/core'
+const middy = require('@middy/core');
   
 
 
