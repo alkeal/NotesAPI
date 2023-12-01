@@ -8,7 +8,7 @@ const middy = require('@middy/core');
   
 
 
-const handler = async (event, context ) => {
+const postNotes = async (event, context ) => {
 
 
    const notes = JSON.parse(event.body);
@@ -37,8 +37,9 @@ const handler = async (event, context ) => {
      TableName: 'notes-db',
      Item: {
       
-      username: notes.username,
+      
       id: nanoid(),
+      username: event.username,
       title: notes.title,
       text: notes.text,
       createdAt: new Date().getTime(),
@@ -63,6 +64,6 @@ const handler = async (event, context ) => {
    
 };
 
-//const handler = middy(postNotes).use(validateToken);
+const handler = middy(postNotes).use(validateToken);
 
 module.exports = { handler };

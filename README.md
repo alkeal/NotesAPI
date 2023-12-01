@@ -11,7 +11,14 @@ authorName: 'Serverless, inc.'
 authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
 -->
 
-
+endpoints:
+  GET - https://bx1vpdpbbe.execute-api.eu-north-1.amazonaws.com/notes
+  POST - https://bx1vpdpbbe.execute-api.eu-north-1.amazonaws.com/notes
+  PUT - https://bx1vpdpbbe.execute-api.eu-north-1.amazonaws.com/notes
+  DELETE - https://bx1vpdpbbe.execute-api.eu-north-1.amazonaws.com/notes/{id}
+  POST - https://bx1vpdpbbe.execute-api.eu-north-1.amazonaws.com/auth/signUp
+  POST - https://bx1vpdpbbe.execute-api.eu-north-1.amazonaws.com/auth/login
+  
 # Serverless Framework AWS NodeJS Example
 
 This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework. The deployed function does not include any event definitions as well as any kind of persistence (database). For more advanced configurations check out the [examples repo](https://github.com/serverless/examples/) which includes integrations with SQS, DynamoDB or examples of functions that are triggered in `cron`-like manner. For details about configuration of specific `events`, please refer to our [documentation](https://www.serverless.com/framework/docs/providers/aws/events/).

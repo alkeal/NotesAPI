@@ -27,7 +27,7 @@ const getNotes = async (event, contect ) => {
   const result = await db.scan({
 
     TableName: 'notes-db',
-    FilterExpression: '#username = :username',
+   FilterExpression: '#username = :username',
     ExpressionAttributeNames: {
       '#username': 'username',
     },
